@@ -1,11 +1,11 @@
 import os # them dong nay len dau file, truoc "from flask import Flask"
 @app.route("/api/info")
 def info():
-ten_sinh_vien = os.environ.get("STUDENT_NAME", "Chua dat bien moi truong")
-return {
-"sinh_vien": ten_sinh_vien,
-"nguon_du_lieu": "Environment Variable tren Render, KHONG hardcode trong code"
-}
+    ten_sinh_vien = os.environ.get("STUDENT_NAME", "Chua dat bien moi truong")
+     return {
+    "sinh_vien": ten_sinh_vien,
+    "nguon_du_lieu": "Environment Variable tren Render, KHONG hardcode trong code"
+    }
 from flask import Flask
 import datetime, platform
 app = Flask(__name__)
