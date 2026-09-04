@@ -13,15 +13,15 @@ visit_count = 0 # Bien dem luu trong RAM cua container
 @app.route("/api/counter")
 def counter():
     global visit_count
-visit_count += 1
-return {
-"so_lan_truy_cap": visit_count,
-"ghi_chu": "So nay se MAT khi container khoi dong lai!"
-}
+    visit_count += 1
+    return {
+    "so_lan_truy_cap": visit_count,
+    "ghi_chu": "So nay se MAT khi container khoi dong lai!"
+     }
 @app.route("/")
 def home():
      return f"""
-<html><head><meta charset="utf-8"><title>Flask PaaS Demo</title>
+    <html><head><meta charset="utf-8"><title>Flask PaaS Demo</title>
 <style>
 body {{ font-family: Arial; max-width: 640px; margin: 60px auto; }}
 .box {{ background:#DEEAF1; border-left: 5px solid #1F4E79;
@@ -43,5 +43,5 @@ h1 {{ color: #1F4E79; }}
 @app.route("/health")
 def health():
     return {"status": "ok"}
-if __name__ == "__main__":
+    if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
