@@ -1,26 +1,15 @@
-import os # them dong nay len dau file, truoc "from flask import Flask"
-@app.route("/api/info")
-def info():
-    ten_sinh_vien = os.environ.get("STUDENT_NAME", "Chua dat bien moi truong")
-     return {
-    "sinh_vien": ten_sinh_vien,
-    "nguon_du_lieu": "Environment Variable tren Render, KHONG hardcode trong code"
-    }
+import datetime
+import os
+import platform
 from flask import Flask
-import datetime, platform
+
 app = Flask(__name__)
-visit_count = 0 # Bien dem luu trong RAM cua container
-@app.route("/api/counter")
-def counter():
-    global visit_count
-    visit_count += 1
-    return {
-    "so_lan_truy_cap": visit_count,
-    "ghi_chu": "So nay se MAT khi container khoi dong lai!"
-     }
+
+visit_count = 0  # Bien dem luu trong RAM cua container
+
 @app.route("/")
 def home():
-     return f"""
+    return f"""
     <html><head><meta charset="utf-8"><title>Flask PaaS Demo</title>
 <style>
 body {{ font-family: Arial; max-width: 640px; margin: 60px auto; }}
@@ -30,7 +19,7 @@ h1 {{ color: #1F4E79; }}
 </style></head><body>
 <h1>Ung dung Flask tren PaaS – phien ban 2!</h1>
 <div class="box">
-<p><b>Sinh vien:</b> TRU0NG_GIA_QUYEN – 233404050203</p>
+<p><b>Sinh vien:</b> TRUONG_GIA_QUYEN – 233404050203</p>
 <p><b>Mon hoc:</b> Dien toan Dam may </p>
 <p><b>Mo hinh:</b> PaaS – Platform as a Service</p>
 <p><b>Python:</b> {platform.python_version()}</p>
@@ -40,8 +29,27 @@ h1 {{ color: #1F4E79; }}
 <p>Developer chi viet code – PaaS lo build, deploy, HTTPS, scaling!</p>
 </body></html>
 """
+
+@app.route("/api/info")
+def info():
+    ten_sinh_vien = os.environ.get("STUDENT_NAME", "Chua dat bien moi truong")
+    return {
+        "sinh_vien": ten_sinh_vien,
+        "nguon_du_lieu": "Environment Variable tren Render, KHONG hardcode trong code"
+    }
+
+@app.route("/api/counter")
+def counter():
+    global visit_count
+    visit_count += 1
+    return {
+        "so_lan_truy_cap": visit_count,
+        "ghi_chu": "So nay se MAT khi container khoi dong lai!"
+    }
+
 @app.route("/health")
 def health():
     return {"status": "ok"}
-    if __name__ == "__main__":
+
+if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
